@@ -1,3 +1,0 @@
-# LCsolver
-LeetCode practice 
-
