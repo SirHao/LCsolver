@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 
-//no.1:       0的情况
+//no.1:从排序数组中删除重复项
 int removeDuplicates(int* nums, int numsSize){
     if(numsSize==0){
         return 0;
@@ -19,7 +19,7 @@ int removeDuplicates(int* nums, int numsSize){
     return index+1;
 }
 
-//no.2:
+//no.2:买卖股票的最佳时机 II
 int maxProfit(int* prices, int pricesSize){
     if(pricesSize==0) return 0;
     int money=0;
@@ -31,7 +31,7 @@ int maxProfit(int* prices, int pricesSize){
     return money;
 }
 
-//no.3:
+//no.3:买卖股票的最佳时机 II
 //本解法 超过98%
 //一种巧妙的方法，超过92%：https://blog.csdn.net/weixin_39088580/article/details/82949403
 void rotate(int* nums, int numsSize, int k){
@@ -51,7 +51,7 @@ void rotate(int* nums, int numsSize, int k){
 }
 
 
-//no.4:
+//no.4: 存在重复
 bool containsDuplicate(int* nums, int numsSize) {
     if(numsSize==0) return false;
     if(numsSize==1) return false;
@@ -106,7 +106,8 @@ bool containsDuplicate2(int* nums, int numsSize) {
 }
 
 
-//no.5:第二种 智商被秀了
+//no.5:只出现一次的数字
+// 第二种 智商被秀了
 int singleNumber(int* nums, int numsSize){
     if(numsSize==1) return nums[0];
 
@@ -129,27 +130,26 @@ int singleNumber2(int* nums, int numsSize){
     return key;
 }
 
-//no.6:两个数的交集 2
-/*
- * class Solution {
-public:
-    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-         map<int,int> MapNums;
-        for (int i=0;i<nums1.size();++i)
-        {
-            ++ MapNums[nums1[i]];
-        }
-
-        vector<int> vec;
-        for (int j=0;j<nums2.size();++j){
-            if(MapNums[nums2[j]]>0){
-                vec.push_back(nums2[j]);
-                --MapNums[nums2[j]];
-            }
-        }
-        return vec;
-    }
-};*/
+//no.6:两个数组的交集 II (c++)
+//class Solution {
+//public:
+//    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+//         map<int,int> MapNums;
+//        for (int i=0;i<nums1.size();++i)
+//        {
+//            ++ MapNums[nums1[i]];
+//        }
+//
+//        vector<int> vec;
+//        for (int j=0;j<nums2.size();++j){
+//            if(MapNums[nums2[j]]>0){
+//                vec.push_back(nums2[j]);
+//                --MapNums[nums2[j]];
+//            }
+//        }
+//        return vec;
+//    }
+//};
 
 //no.7: 加一
 int* plusOne(int* digits, int digitsSize, int* returnSize){
@@ -278,4 +278,24 @@ bool isValidSudoku(char** board, int boardSize, int* boardColSize){
     }
     return true;
 }
+
+//no.11旋转图像
+void rotateMatrix(int** matrix, int matrixRowSize, int *matrixColSizes) {
+
+    int i, j;
+    int temp;
+
+    for(j = 0; j < matrixRowSize/2; j++)
+        for(i = j; i < matrixRowSize - 1 - j; i++)
+        {
+            /* 旋转移位 */
+            temp = matrix[j][i];
+            matrix[j][i] = matrix[matrixRowSize - i - 1][j];
+            matrix[matrixRowSize - i - 1][j] = matrix[matrixRowSize - j - 1][matrixRowSize - i - 1];
+            matrix[matrixRowSize - j - 1][matrixRowSize - i - 1] = matrix[i][matrixRowSize - j - 1];
+            matrix[i][matrixRowSize - j - 1] = temp;
+        }
+}
+
+
 
