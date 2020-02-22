@@ -12,6 +12,7 @@ Here are the records
 + 2020-02-10  : basic practice for link(single direction)     (**link.c**)
 + 2020-02-15  : basic practice for tree and sort_and_search problems (**tree.c sort_and search.c)**
 + 2020-02-19：dynastic problems and math problems and other type(**dyn.c math.c other.c**)
++ 2020-02-02：finish all this part ,and the last two are solved by java(**other.java**)
 
 #### Part Two 
 
