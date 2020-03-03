@@ -18,6 +18,10 @@ Here are the records
 
 + 2020-02-21：concurrent problem  excute three thread in a sequence solved by java(**foo.java**)
 
+#### PartThree
+
++ 2020-03-03:begin first weekly normal practice(**commonweek1.java**)
+
 #### Weekly Contest
 
 + 2020-02-23 the 177th weekly contest(**w2_23.java**)
