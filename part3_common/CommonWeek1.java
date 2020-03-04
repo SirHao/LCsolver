@@ -1,4 +1,107 @@
 class CommonWeek1{
+    //2020 03 04
+    //994. 腐烂的橘子
+    int[] dr = new int[]{-1, 0, 1, 0};
+    int[] dc = new int[]{0, -1, 0, 1};
+    public int orangesRotting(int[][] grid) {
+        int row=grid.length;
+        if(row==0) return 0;
+        int col=grid[0].length;
+        if(col==0) return 0;
+        int day=0;
+        //
+        Queue<int[]> que=new LinkedList<>();
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(grid[i][j]==2){
+                    que.offer(new int[]{i,j,0});
+                }
+            }
+        }
+
+        while(!que.isEmpty()){
+            int []tmp=que.poll();
+            for(int i=0;i<4;i++){
+                int x=tmp[0]+dr[i];
+                int y=tmp[1]+dc[i];
+                if(x>-1 & x<row &y>-1 &y<col){
+                    if(grid[x][y]==1){
+                        que.offer(new int[]{x,y,tmp[2]+1});
+                        grid[x][y]=2;
+                    }
+                }
+            }
+            day=tmp[2];
+        }
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                if(grid[i][j]==1){
+                    return -1;
+                }
+            }
+        }
+        return day;
+
+    }
+
+    //2020 03 04
+    //86 分割链表
+    public ListNode partition(ListNode head, int x) {
+        if(head==null) return null;
+        ListNode small=new ListNode(0);ListNode smallhead=small;
+        ListNode big=new ListNode(0);ListNode bighead=big;
+        int hassmall=0,hasbig=0;
+        while(head!=null){
+            if(head.val<x){
+                hassmall=1;
+                small.next=new ListNode(head.val);
+                small=small.next;
+            }else{
+                hasbig=1;
+                big.next=new ListNode(head.val);
+                big=big.next;
+            }
+
+            if(head.next==null) break;
+            head=head.next;
+        }
+
+        if(hassmall==0) return bighead.next;
+        if(hasbig==0) return smallhead.next;
+
+        small.next=bighead.next;
+        return smallhead.next;
+
+    }
+    //2020 03 04
+    //6. Z 字形变换
+    public String convert(String s, int numRows) {
+        if(numRows==1) return s;
+        int len=s.length();
+        StringBuilder ret=new StringBuilder("");
+        int topIndex=(numRows-1)*2;
+
+        for(int i=0;i<len;i=i+topIndex){
+            ret.append(s.charAt(i));
+        }
+        int tmplen=(len/topIndex+1)*topIndex;
+
+        for(int i=1;i<numRows-1;i++){
+            for(int j=0;j<=tmplen;j=j+topIndex){
+                if(j-i>0&j-i<len)
+                    ret.append(s.charAt(j-i));
+                if(j+i<len)
+                    ret.append(s.charAt(j+i));
+            }
+        }
+        for(int i=numRows-1;i<len;i=i+topIndex){
+            ret.append(s.charAt(i));
+        }
+        return ret.toString();
+
+    }
+
+
     //141. 环形链表
     //双指针方法
     public boolean hasCycle1_1(ListNode head) {
@@ -106,5 +209,8 @@ class CommonWeek1{
         ListNode ret=head.next;
         head.next=null;
         return ret;
+
     }
+
+
 }

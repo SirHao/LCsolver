@@ -21,6 +21,7 @@ Here are the records
 #### PartThree
 
 + 2020-03-03:begin first weekly normal practice(**commonweek1.java**)
++ 2020-03-04:update the first week by three problems.
 
 #### Weekly Contest
 
