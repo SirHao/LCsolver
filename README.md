@@ -22,6 +22,8 @@ Here are the records
 
 + 2020-03-03:begin first weekly normal practice(**commonweek1.java**)
 + 2020-03-04:update the first week by three problems.
++ 2020-03-05:update the first week by 3.5 problems.(0.5 means solved not well)
++ 2020-03-06:update the first week by 2.5 problems.
 
 #### Weekly Contest
 

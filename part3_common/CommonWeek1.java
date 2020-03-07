@@ -1,4 +1,139 @@
 class CommonWeek1{
+    //2020 03 06
+    //230. 二叉搜索树中第K小的元素 比中序遍历少时间复杂度（O(N)->O(K)）
+    public int kthSmallest(TreeNode root, int k) {
+        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+
+        while (true) {
+            while (root != null) {
+                stack.add(root);
+                root = root.left;
+            }
+            root = stack.removeLast();
+            if (--k == 0) return root.val;
+            root = root.right;
+        }
+    }
+
+    //2020 03 06
+    //面试题57 - II. 和为s的连续正数序列
+    public int[][] findContinuousSequence(int target) {
+        List<int[]> result = new ArrayList<>();
+        int i = 1;
+        int tmp;
+        while (i*(i+1)/2 < target){
+            tmp=target-(i+i*(i-1)/2);
+            if(tmp%(i+1)==0){
+                int ret=tmp/(i+1);
+                int[] reslist=new int[i+1];
+                for(int j=0;j<i+1;j++){
+                    reslist[j]=ret;
+                    ret++;
+                }
+                result.add(reslist);
+            }
+            i++;
+        }
+        Collections.reverse(result);
+        return result.toArray(new int[0][]);
+    }
+    //2030 03 06
+    //215. 数组中的第K个最大元素 堆方法 Nlog(K)
+    public int findKthLargest(int[] nums, int k) {
+        // init heap 'the smallest element first'
+        PriorityQueue<Integer> heap =
+                new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
+
+        // keep k largest elements in the heap
+        for (int n: nums) {
+            heap.add(n);
+            if (heap.size() > k)
+                heap.poll();
+        }
+
+        // output
+        return heap.poll();
+    }
+
+    //2020 03 05
+    //215. 数组中的第K个最大元素 Nlog(N)
+    public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+        return nums[nums.length-k];
+    }
+    //2020 03 05
+    //148. 排序链表
+    public ListNode sortList(ListNode head) {
+        if(head==null || head.next==null) return head;
+
+        ListNode mid=head,fast=head.next;
+        while(fast!=null && fast.next!=null){
+            mid=mid.next;
+            fast=fast.next.next;
+        }
+
+        ListNode right=mid.next;
+        mid.next=null;
+        ListNode leftsorted=sortList(head);
+        ListNode rightsorted=sortList(right);
+
+        ListNode ret=new ListNode(0);
+        ListNode needmerge=ret;
+
+        while(leftsorted!=null && rightsorted!=null){
+            if(leftsorted.val>rightsorted.val){
+                needmerge.next=rightsorted;
+                rightsorted=rightsorted.next;
+            }else{
+                needmerge.next=leftsorted;
+                leftsorted=leftsorted.next;
+            }
+            needmerge=needmerge.next;
+        }
+        if(leftsorted!=null)needmerge.next=leftsorted;
+        if(rightsorted!=null) needmerge.next=rightsorted;
+
+        return ret.next;
+
+    }
+    //2020 03 05
+    //分糖果 2
+    public int[] distributeCandies(int candies, int num_people) {
+        int [] ret=new int[num_people];
+        int childTurn=0;
+        while(candies>0){
+            ret[childTurn%num_people]+=Math.min(++childTurn,candies);
+            candies-=childTurn;
+        }
+        return ret;
+    }
+    //2020 03 05
+    //6. Z 字形变换
+    public String convert(String s, int numRows) {
+        if(numRows==1) return s;
+        int len=s.length();
+        StringBuilder ret=new StringBuilder("");
+        int topIndex=(numRows-1)*2;
+
+        for(int i=0;i<len;i=i+topIndex){
+            ret.append(s.charAt(i));
+        }
+        int tmplen=(len/topIndex+1)*topIndex;
+
+        for(int i=1;i<numRows-1;i++){
+            for(int j=0;j<=tmplen;j=j+topIndex){
+                if(j-i>0&j-i<len)
+                    ret.append(s.charAt(j-i));
+                if(j+i<len)
+                    ret.append(s.charAt(j+i));
+            }
+        }
+        for(int i=numRows-1;i<len;i=i+topIndex){
+            ret.append(s.charAt(i));
+        }
+        return ret.toString();
+
+    }
     //2020 03 04
     //994. 腐烂的橘子
     int[] dr = new int[]{-1, 0, 1, 0};
